@@ -1,0 +1,226 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "name": "PL/SQL",
+    "scopeName": "source.plsql",
+    "patterns": [
+        {
+            "include": "#comments"
+        },
+        {
+            "include": "#strings"
+        },
+        {
+            "include": "#numbers"
+        },
+        {
+            "include": "#operators"
+        },
+        {
+            "include": "#builtin-packages"
+        },
+        {
+            "include": "#program-units"
+        },
+        {
+            "include": "#data-types"
+        },
+        {
+            "include": "#control-flow"
+        },
+        {
+            "include": "#exception-handling"
+        },
+        {
+            "include": "#sql-keywords"
+        },
+        {
+            "include": "#plsql-keywords"
+        },
+        {
+            "include": "#functions"
+        }
+    ],
+    "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "name": "comment.line.double-dash.plsql",
+                    "match": "--.*$"
+                },
+                {
+                    "name": "comment.block.plsql",
+                    "begin": "/\\*",
+                    "end": "\\*/"
+                }
+            ]
+        },
+        "strings": {
+            "patterns": [
+                {
+                    "name": "string.quoted.single.plsql",
+                    "begin": "'",
+                    "end": "'",
+                    "patterns": [
+                        {
+                            "name": "constant.character.escape.plsql",
+                            "match": "''"
+                        }
+                    ]
+                },
+                {
+                    "name": "string.quoted.double.plsql",
+                    "begin": "\"",
+                    "end": "\""
+                },
+                {
+                    "name": "string.quoted.q.plsql",
+                    "begin": "[Qq]'\\[",
+                    "end": "\\]'"
+                },
+                {
+                    "name": "string.quoted.q.plsql",
+                    "begin": "[Qq]'\\{",
+                    "end": "\\}'"
+                },
+                {
+                    "name": "string.quoted.q.plsql",
+                    "begin": "[Qq]'<",
+                    "end": ">'"
+                },
+                {
+                    "name": "string.quoted.q.plsql",
+                    "begin": "[Qq]'\\(",
+                    "end": "\\)'"
+                }
+            ]
+        },
+        "numbers": {
+            "patterns": [
+                {
+                    "name": "constant.numeric.plsql",
+                    "match": "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b"
+                }
+            ]
+        },
+        "operators": {
+            "patterns": [
+                {
+                    "name": "keyword.operator.assignment.plsql",
+                    "match": ":="
+                },
+                {
+                    "name": "keyword.operator.comparison.plsql",
+                    "match": "(=|<>|!=|<|>|<=|>=)"
+                },
+                {
+                    "name": "keyword.operator.concatenation.plsql",
+                    "match": "\\|\\|"
+                },
+                {
+                    "name": "keyword.operator.arithmetic.plsql",
+                    "match": "(\\+|-|\\*|/)"
+                }
+            ]
+        },
+        "builtin-packages": {
+            "patterns": [
+                {
+                    "name": "support.class.builtin.plsql",
+                    "match": "(?i)\\b(DBMS_OUTPUT|DBMS_SQL|DBMS_LOB|DBMS_UTILITY|DBMS_RANDOM|DBMS_LOCK|DBMS_JOB|DBMS_SCHEDULER|DBMS_METADATA|DBMS_STATS|DBMS_XMLGEN|DBMS_XSLPROCESSOR|UTL_FILE|UTL_HTTP|UTL_SMTP|UTL_RAW|UTL_ENCODE|UTL_I18N|HTF|HTP)\\b"
+                },
+                {
+                    "name": "support.function.builtin.plsql",
+                    "match": "(?i)\\b(PUT_LINE|PUT|NEW_LINE|GET_LINE|GET_LINES|ENABLE|DISABLE|OPEN_CURSOR|CLOSE_CURSOR|PARSE|EXECUTE|FETCH_ROWS|FOPEN|FCLOSE|FFLUSH|GET_LINE|PUT_LINE|IS_OPEN|REQUEST|REQUEST_PIECES|SET_HEADER|BEGIN_REQUEST|END_REQUEST)\\b"
+                }
+            ]
+        },
+        "program-units": {
+            "patterns": [
+                {
+                    "name": "storage.type.function.plsql",
+                    "match": "(?i)\\b(FUNCTION|PROCEDURE|PACKAGE|BODY|TRIGGER|TYPE)\\b"
+                },
+                {
+                    "name": "keyword.other.create.plsql",
+                    "match": "(?i)\\b(CREATE|OR|REPLACE|ALTER|DROP)\\b"
+                },
+                {
+                    "name": "keyword.other.plsql",
+                    "match": "(?i)\\b(IS|AS|DETERMINISTIC|PIPELINED|PARALLEL_ENABLE|RESULT_CACHE|AUTHID|DEFINER|CURRENT_USER|ACCESSIBLE|BY)\\b"
+                }
+            ]
+        },
+        "data-types": {
+            "patterns": [
+                {
+                    "name": "storage.type.plsql",
+                    "match": "(?i)\\b(VARCHAR2|VARCHAR|CHAR|NCHAR|NVARCHAR2|NUMBER|INTEGER|INT|SMALLINT|DECIMAL|NUMERIC|FLOAT|REAL|DOUBLE|PRECISION|DATE|TIMESTAMP|INTERVAL|YEAR|MONTH|DAY|HOUR|MINUTE|SECOND|CLOB|NCLOB|BLOB|BFILE|RAW|LONG|ROWID|UROWID|BOOLEAN|PLS_INTEGER|BINARY_INTEGER|NATURAL|NATURALN|POSITIVE|POSITIVEN|SIGNTYPE|SIMPLE_INTEGER|BINARY_FLOAT|BINARY_DOUBLE|SYS_REFCURSOR|XMLTYPE|JSON)\\b"
+                },
+                {
+                    "name": "storage.type.object.plsql",
+                    "match": "(?i)\\b(RECORD|TABLE|VARRAY|ARRAY|OBJECT|REF|CURSOR)\\b"
+                },
+                {
+                    "name": "storage.modifier.plsql",
+                    "match": "(?i)%(ROWTYPE|TYPE|ISOPEN|FOUND|NOTFOUND|ROWCOUNT)"
+                }
+            ]
+        },
+        "control-flow": {
+            "patterns": [
+                {
+                    "name": "keyword.control.plsql",
+                    "match": "(?i)\\b(IF|THEN|ELSE|ELSIF|END\\s+IF|CASE|WHEN|END\\s+CASE)\\b"
+                },
+                {
+                    "name": "keyword.control.loop.plsql",
+                    "match": "(?i)\\b(LOOP|END\\s+LOOP|FOR|WHILE|FORALL|EXIT|EXIT\\s+WHEN|CONTINUE|CONTINUE\\s+WHEN|REVERSE|IN)\\b"
+                },
+                {
+                    "name": "keyword.control.plsql",
+                    "match": "(?i)\\b(GOTO|RETURN|NULL)\\b"
+                }
+            ]
+        },
+        "exception-handling": {
+            "patterns": [
+                {
+                    "name": "keyword.control.exception.plsql",
+                    "match": "(?i)\\b(EXCEPTION|RAISE|RAISE_APPLICATION_ERROR|WHEN|OTHERS|PRAGMA|EXCEPTION_INIT|SQLCODE|SQLERRM)\\b"
+                },
+                {
+                    "name": "support.constant.exception.plsql",
+                    "match": "(?i)\\b(NO_DATA_FOUND|NO_DATA_NEEDED|TOO_MANY_ROWS|ZERO_DIVIDE|VALUE_ERROR|INVALID_CURSOR|CURSOR_ALREADY_OPEN|DUP_VAL_ON_INDEX|INVALID_NUMBER|LOGIN_DENIED|NOT_LOGGED_ON|PROGRAM_ERROR|STORAGE_ERROR|TIMEOUT_ON_RESOURCE|ACCESS_INTO_NULL|CASE_NOT_FOUND|COLLECTION_IS_NULL|ROWTYPE_MISMATCH|SELF_IS_NULL|SUBSCRIPT_BEYOND_COUNT|SUBSCRIPT_OUTSIDE_LIMIT|SYS_INVALID_ROWID)\\b"
+                }
+            ]
+        },
+        "sql-keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.other.sql.plsql",
+                    "match": "(?i)\\b(SELECT|INSERT|UPDATE|DELETE|MERGE|FROM|WHERE|AND|OR|NOT|IN|EXISTS|BETWEEN|LIKE|ESCAPE|IS|NULL|ORDER|BY|GROUP|HAVING|UNION|ALL|INTERSECT|MINUS|DISTINCT|UNIQUE|JOIN|INNER|LEFT|RIGHT|FULL|OUTER|CROSS|NATURAL|ON|USING|INTO|VALUES|SET|AS|DUAL|WITH|RECURSIVE|CONNECT|START|PRIOR|LEVEL|FETCH|FIRST|NEXT|ROWS|ONLY|OFFSET|LIMIT|PIVOT|UNPIVOT|ROLLUP|CUBE|GROUPING|SETS)\\b"
+                },
+                {
+                    "name": "keyword.other.dml.plsql",
+                    "match": "(?i)\\b(COMMIT|ROLLBACK|SAVEPOINT|TRUNCATE|LOCK|TABLE|NOWAIT|WAIT|FOR\\s+UPDATE|BULK\\s+COLLECT|RETURNING)\\b"
+                }
+            ]
+        },
+        "plsql-keywords": {
+            "patterns": [
+                {
+                    "name": "keyword.other.plsql",
+                    "match": "(?i)\\b(BEGIN|END|DECLARE|EXECUTE|IMMEDIATE|USING|OPEN|CLOSE|FETCH|BULK|COLLECT|LIMIT|SAVE|EXCEPTIONS|INDICES|OF|BETWEEN|CONSTANT|DEFAULT|NOCOPY|OUT|IN\\s+OUT)\\b"
+                }
+            ]
+        },
+        "functions": {
+            "patterns": [
+                {
+                    "name": "support.function.builtin.plsql",
+                    "match": "(?i)\\b(ABS|ACOS|ADD_MONTHS|ASCII|ASCIISTR|ASIN|ATAN|ATAN2|AVG|BFILENAME|BITAND|CARDINALITY|CAST|CEIL|CHR|COALESCE|COMPOSE|CONCAT|CONVERT|CORR|COS|COSH|COUNT|COVAR_POP|COVAR_SAMP|CUME_DIST|CURRENT_DATE|CURRENT_TIMESTAMP|DBTIMEZONE|DECODE|DECOMPOSE|DENSE_RANK|DUMP|EMPTY_BLOB|EMPTY_CLOB|EXP|EXTRACT|FIRST|FIRST_VALUE|FLOOR|FROM_TZ|GREATEST|HEXTORAW|INITCAP|INSTR|LAG|LAST|LAST_DAY|LAST_VALUE|LEAD|LEAST|LENGTH|LN|LNNVL|LOCALTIMESTAMP|LOG|LOWER|LPAD|LTRIM|MAX|MEDIAN|MIN|MOD|MONTHS_BETWEEN|NANVL|NEW_TIME|NEXT_DAY|NLS_CHARSET_DECL_LEN|NLS_CHARSET_ID|NLS_CHARSET_NAME|NLS_INITCAP|NLS_LOWER|NLS_UPPER|NLSSORT|NTILE|NULLIF|NUMTODSINTERVAL|NUMTOYMINTERVAL|NVL|NVL2|OVER|PARTITION|PERCENT_RANK|PERCENTILE_CONT|PERCENTILE_DISC|POWER|RANK|RATIO_TO_REPORT|RAWTOHEX|RAWTONHEX|REGEXP_COUNT|REGEXP_INSTR|REGEXP_LIKE|REGEXP_REPLACE|REGEXP_SUBSTR|REMAINDER|REPLACE|ROUND|ROW_NUMBER|ROWIDTOCHAR|ROWIDTONCHAR|RPAD|RTRIM|SESSIONTIMEZONE|SIGN|SIN|SINH|SOUNDEX|SQRT|STDDEV|STDDEV_POP|STDDEV_SAMP|SUBSTR|SUM|SYS_CONTEXT|SYS_GUID|SYSDATE|SYSTIMESTAMP|TAN|TANH|TO_BINARY_DOUBLE|TO_BINARY_FLOAT|TO_CHAR|TO_CLOB|TO_DATE|TO_DSINTERVAL|TO_LOB|TO_MULTI_BYTE|TO_NCHAR|TO_NCLOB|TO_NUMBER|TO_SINGLE_BYTE|TO_TIMESTAMP|TO_TIMESTAMP_TZ|TO_YMINTERVAL|TRANSLATE|TREAT|TRIM|TRUNC|TZ_OFFSET|UID|UNISTR|UPPER|USER|USERENV|VAR_POP|VAR_SAMP|VARIANCE|VSIZE|WIDTH_BUCKET|XMLAGG|XMLCAST|XMLCOMMENT|XMLCONCAT|XMLELEMENT|XMLFOREST|XMLPARSE|XMLPI|XMLQUERY|XMLROOT|XMLSEQUENCE|XMLSERIALIZE|XMLTABLE|XMLTRANSFORM)\\b"
+                }
+            ]
+        }
+    }
+}

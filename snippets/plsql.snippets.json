@@ -1,0 +1,1085 @@
+{
+    "Create Procedure": {
+        "prefix": [
+            "proc",
+            "procedure",
+            "create procedure"
+        ],
+        "body": [
+            "CREATE OR REPLACE PROCEDURE ${1:procedure_name}",
+            "IS",
+            "BEGIN",
+            "  ${0}",
+            "END ${1:procedure_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL procedure"
+    },
+    "Create Procedure with Parameters": {
+        "prefix": [
+            "procp",
+            "procedure params"
+        ],
+        "body": [
+            "CREATE OR REPLACE PROCEDURE ${1:procedure_name} (",
+            "  p_${2:param1} IN ${3:VARCHAR2}",
+            ")",
+            "IS",
+            "BEGIN",
+            "  ${0}",
+            "END ${1:procedure_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL procedure with parameters"
+    },
+    "Create Function": {
+        "prefix": [
+            "func",
+            "function",
+            "create function"
+        ],
+        "body": [
+            "CREATE OR REPLACE FUNCTION ${1:function_name}",
+            "RETURN ${2:VARCHAR2}",
+            "IS",
+            "  l_result ${2:VARCHAR2};",
+            "BEGIN",
+            "  ${0}",
+            "  RETURN l_result;",
+            "END ${1:function_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL function"
+    },
+    "Create Function with Parameters": {
+        "prefix": [
+            "funcp",
+            "function params"
+        ],
+        "body": [
+            "CREATE OR REPLACE FUNCTION ${1:function_name} (",
+            "  p_${2:param1} IN ${3:VARCHAR2}",
+            ")",
+            "RETURN ${4:VARCHAR2}",
+            "IS",
+            "  l_result ${4:VARCHAR2};",
+            "BEGIN",
+            "  ${0}",
+            "  RETURN l_result;",
+            "END ${1:function_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL function with parameters"
+    },
+    "Create Package Specification": {
+        "prefix": [
+            "pkgs",
+            "package spec",
+            "package specification"
+        ],
+        "body": [
+            "CREATE OR REPLACE PACKAGE ${1:package_name}",
+            "IS",
+            "  -- Public type declarations",
+            "  ",
+            "  -- Public constant declarations",
+            "  ",
+            "  -- Public variable declarations",
+            "  ",
+            "  -- Public function and procedure declarations",
+            "  ${0}",
+            "  ",
+            "END ${1:package_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL package specification"
+    },
+    "Create Package Body": {
+        "prefix": [
+            "pkgb",
+            "package body"
+        ],
+        "body": [
+            "CREATE OR REPLACE PACKAGE BODY ${1:package_name}",
+            "IS",
+            "  -- Private type declarations",
+            "  ",
+            "  -- Private constant declarations",
+            "  ",
+            "  -- Private variable declarations",
+            "  ",
+            "  -- Function and procedure implementations",
+            "  ${0}",
+            "  ",
+            "END ${1:package_name};",
+            "/"
+        ],
+        "description": "Create a new PL/SQL package body"
+    },
+    "Create Trigger": {
+        "prefix": [
+            "trig",
+            "trigger",
+            "create trigger"
+        ],
+        "body": [
+            "CREATE OR REPLACE TRIGGER ${1:trigger_name}",
+            "${2|BEFORE,AFTER,INSTEAD OF|} ${3|INSERT,UPDATE,DELETE|} ON ${4:table_name}",
+            "${5|FOR EACH ROW,|}",
+            "BEGIN",
+            "  ${0}",
+            "END ${1:trigger_name};",
+            "/"
+        ],
+        "description": "Create a new database trigger"
+    },
+    "Anonymous Block": {
+        "prefix": [
+            "anon",
+            "anonymous",
+            "begin"
+        ],
+        "body": [
+            "DECLARE",
+            "  ${1:-- declarations}",
+            "BEGIN",
+            "  ${0}",
+            "EXCEPTION",
+            "  WHEN OTHERS THEN",
+            "    DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);",
+            "END;",
+            "/"
+        ],
+        "description": "Create an anonymous PL/SQL block"
+    },
+    "Simple Anonymous Block": {
+        "prefix": [
+            "sanon",
+            "simple anonymous"
+        ],
+        "body": [
+            "BEGIN",
+            "  ${0}",
+            "END;",
+            "/"
+        ],
+        "description": "Create a simple anonymous PL/SQL block without declarations"
+    },
+    "Exception Block": {
+        "prefix": [
+            "exc",
+            "exception"
+        ],
+        "body": [
+            "EXCEPTION",
+            "  WHEN ${1|NO_DATA_FOUND,TOO_MANY_ROWS,DUP_VAL_ON_INDEX,VALUE_ERROR,OTHERS|} THEN",
+            "    ${0}"
+        ],
+        "description": "Add exception handling block"
+    },
+    "Exception When Others": {
+        "prefix": [
+            "exco",
+            "when others"
+        ],
+        "body": [
+            "EXCEPTION",
+            "  WHEN OTHERS THEN",
+            "    DBMS_OUTPUT.PUT_LINE('Error: ' || SQLCODE || ' - ' || SQLERRM);",
+            "    ${0}"
+        ],
+        "description": "Add catch-all exception handler"
+    },
+    "Cursor Declaration": {
+        "prefix": [
+            "cur",
+            "cursor"
+        ],
+        "body": [
+            "CURSOR ${1:cursor_name} IS",
+            "  SELECT ${2:columns}",
+            "  FROM ${3:table_name}",
+            "  WHERE ${4:condition};",
+            "${0}"
+        ],
+        "description": "Declare an explicit cursor"
+    },
+    "Cursor For Loop": {
+        "prefix": [
+            "curf",
+            "cursor for",
+            "for cursor"
+        ],
+        "body": [
+            "FOR ${1:rec} IN (SELECT ${2:columns} FROM ${3:table_name} WHERE ${4:condition})",
+            "LOOP",
+            "  ${0}",
+            "END LOOP;"
+        ],
+        "description": "Cursor FOR loop with inline query"
+    },
+    "Cursor For Loop with Explicit Cursor": {
+        "prefix": [
+            "curfe",
+            "explicit cursor for"
+        ],
+        "body": [
+            "FOR ${1:rec} IN ${2:cursor_name}",
+            "LOOP",
+            "  ${0}",
+            "END LOOP;"
+        ],
+        "description": "Cursor FOR loop with explicit cursor"
+    },
+    "Basic Loop": {
+        "prefix": [
+            "loop",
+            "basic loop"
+        ],
+        "body": [
+            "LOOP",
+            "  ${0}",
+            "  EXIT WHEN ${1:condition};",
+            "END LOOP;"
+        ],
+        "description": "Basic loop with EXIT WHEN"
+    },
+    "While Loop": {
+        "prefix": [
+            "while",
+            "while loop"
+        ],
+        "body": [
+            "WHILE ${1:condition}",
+            "LOOP",
+            "  ${0}",
+            "END LOOP;"
+        ],
+        "description": "WHILE loop"
+    },
+    "For Loop Numeric": {
+        "prefix": [
+            "forn",
+            "for numeric",
+            "for i"
+        ],
+        "body": [
+            "FOR ${1:i} IN ${2:1}..${3:10}",
+            "LOOP",
+            "  ${0}",
+            "END LOOP;"
+        ],
+        "description": "Numeric FOR loop"
+    },
+    "For Loop Reverse": {
+        "prefix": [
+            "forr",
+            "for reverse"
+        ],
+        "body": [
+            "FOR ${1:i} IN REVERSE ${2:1}..${3:10}",
+            "LOOP",
+            "  ${0}",
+            "END LOOP;"
+        ],
+        "description": "Reverse numeric FOR loop"
+    },
+    "If Then": {
+        "prefix": [
+            "if",
+            "ifthen"
+        ],
+        "body": [
+            "IF ${1:condition} THEN",
+            "  ${0}",
+            "END IF;"
+        ],
+        "description": "Simple IF-THEN statement"
+    },
+    "If Then Else": {
+        "prefix": [
+            "ife",
+            "if else",
+            "ifthenelse"
+        ],
+        "body": [
+            "IF ${1:condition} THEN",
+            "  ${2}",
+            "ELSE",
+            "  ${0}",
+            "END IF;"
+        ],
+        "description": "IF-THEN-ELSE statement"
+    },
+    "If Elsif Else": {
+        "prefix": [
+            "ifee",
+            "if elsif",
+            "ifthenelsif"
+        ],
+        "body": [
+            "IF ${1:condition1} THEN",
+            "  ${2}",
+            "ELSIF ${3:condition2} THEN",
+            "  ${4}",
+            "ELSE",
+            "  ${0}",
+            "END IF;"
+        ],
+        "description": "IF-ELSIF-ELSE statement"
+    },
+    "Case Statement": {
+        "prefix": [
+            "case",
+            "case statement"
+        ],
+        "body": [
+            "CASE ${1:expression}",
+            "  WHEN ${2:value1} THEN",
+            "    ${3}",
+            "  WHEN ${4:value2} THEN",
+            "    ${5}",
+            "  ELSE",
+            "    ${0}",
+            "END CASE;"
+        ],
+        "description": "Simple CASE statement"
+    },
+    "Case Expression": {
+        "prefix": [
+            "casex",
+            "case expression"
+        ],
+        "body": [
+            "CASE",
+            "  WHEN ${1:condition1} THEN ${2:result1}",
+            "  WHEN ${3:condition2} THEN ${4:result2}",
+            "  ELSE ${0:default_result}",
+            "END"
+        ],
+        "description": "Searched CASE expression"
+    },
+    "Select Into": {
+        "prefix": [
+            "selinto",
+            "select into"
+        ],
+        "body": [
+            "SELECT ${1:columns}",
+            "INTO ${2:variables}",
+            "FROM ${3:table_name}",
+            "WHERE ${4:condition};",
+            "${0}"
+        ],
+        "description": "SELECT INTO statement"
+    },
+    "Bulk Collect": {
+        "prefix": [
+            "bulk",
+            "bulk collect"
+        ],
+        "body": [
+            "SELECT ${1:columns}",
+            "BULK COLLECT INTO ${2:collection}",
+            "FROM ${3:table_name}",
+            "WHERE ${4:condition};",
+            "${0}"
+        ],
+        "description": "Bulk collect into collection"
+    },
+    "Forall": {
+        "prefix": [
+            "forall"
+        ],
+        "body": [
+            "FORALL ${1:i} IN ${2:collection}.FIRST..${2:collection}.LAST",
+            "  ${0:dml_statement};"
+        ],
+        "description": "FORALL bulk DML statement"
+    },
+    "Execute Immediate": {
+        "prefix": [
+            "exim",
+            "execute immediate"
+        ],
+        "body": [
+            "EXECUTE IMMEDIATE '${1:sql_statement}'",
+            "  ${2|INTO l_result,USING l_bind_var,|};"
+        ],
+        "description": "Execute dynamic SQL"
+    },
+    "Raise Application Error": {
+        "prefix": [
+            "raise",
+            "raise application error"
+        ],
+        "body": [
+            "RAISE_APPLICATION_ERROR(-20${1:001}, '${2:Error message}');"
+        ],
+        "description": "Raise a user-defined error"
+    },
+    "DBMS_OUTPUT.PUT_LINE": {
+        "prefix": [
+            "put",
+            "putline",
+            "dbms_output"
+        ],
+        "body": [
+            "DBMS_OUTPUT.PUT_LINE(${1:'message'});"
+        ],
+        "description": "Print debug message to output"
+    },
+    "Record Type": {
+        "prefix": [
+            "rec",
+            "record type"
+        ],
+        "body": [
+            "TYPE ${1:type_name} IS RECORD (",
+            "  ${2:field1} ${3:VARCHAR2(100)},",
+            "  ${4:field2} ${5:NUMBER}",
+            ");",
+            "${0}"
+        ],
+        "description": "Declare a record type"
+    },
+    "Table Type": {
+        "prefix": [
+            "tabt",
+            "table type"
+        ],
+        "body": [
+            "TYPE ${1:type_name} IS TABLE OF ${2:element_type} INDEX BY ${3|PLS_INTEGER,VARCHAR2(100)|};",
+            "${0}"
+        ],
+        "description": "Declare an associative array type"
+    },
+    "Nested Table Type": {
+        "prefix": [
+            "ntt",
+            "nested table type"
+        ],
+        "body": [
+            "TYPE ${1:type_name} IS TABLE OF ${2:element_type};",
+            "${0}"
+        ],
+        "description": "Declare a nested table type"
+    },
+    "Varray Type": {
+        "prefix": [
+            "varr",
+            "varray type"
+        ],
+        "body": [
+            "TYPE ${1:type_name} IS VARRAY(${2:100}) OF ${3:element_type};",
+            "${0}"
+        ],
+        "description": "Declare a varray type"
+    },
+    "Local Variable": {
+        "prefix": [
+            "lv",
+            "local var"
+        ],
+        "body": [
+            "l_${1:name} ${2:VARCHAR2(100)}${3| := NULL|;}",
+            "${0}"
+        ],
+        "description": "Declare a local variable"
+    },
+    "Constant": {
+        "prefix": [
+            "const",
+            "constant"
+        ],
+        "body": [
+            "c_${1:name} CONSTANT ${2:VARCHAR2(100)} := ${3:'value'};",
+            "${0}"
+        ],
+        "description": "Declare a constant"
+    },
+    "Create Table": {
+        "prefix": [
+            "crtab",
+            "create table"
+        ],
+        "body": [
+            "CREATE TABLE ${1:table_name} (",
+            "  ${2:id}           NUMBER GENERATED ALWAYS AS IDENTITY,",
+            "  ${3:column1}      VARCHAR2(100) NOT NULL,",
+            "  ${4:created_date} DATE DEFAULT SYSDATE,",
+            "  ${5:created_by}   VARCHAR2(50) DEFAULT USER,",
+            "  CONSTRAINT ${1:table_name}_pk PRIMARY KEY (${2:id})",
+            ");",
+            "${0}"
+        ],
+        "description": "Create a new table with common columns"
+    },
+    "Create Sequence": {
+        "prefix": [
+            "seq",
+            "sequence",
+            "create sequence"
+        ],
+        "body": [
+            "CREATE SEQUENCE ${1:sequence_name}",
+            "  START WITH ${2:1}",
+            "  INCREMENT BY ${3:1}",
+            "  ${4|NOCACHE,CACHE 20|}",
+            "  ${5|NOCYCLE,CYCLE|};",
+            "${0}"
+        ],
+        "description": "Create a new sequence"
+    },
+    "Create View": {
+        "prefix": [
+            "view",
+            "create view"
+        ],
+        "body": [
+            "CREATE OR REPLACE VIEW ${1:view_name} AS",
+            "SELECT ${2:columns}",
+            "FROM ${3:table_name}",
+            "WHERE ${4:condition};",
+            "${0}"
+        ],
+        "description": "Create or replace a view"
+    },
+    "Create Index": {
+        "prefix": [
+            "idx",
+            "index",
+            "create index"
+        ],
+        "body": [
+            "CREATE ${1|INDEX,UNIQUE INDEX,BITMAP INDEX|} ${2:index_name}",
+            "ON ${3:table_name} (${4:columns});",
+            "${0}"
+        ],
+        "description": "Create an index"
+    },
+    "Add Constraint": {
+        "prefix": [
+            "addcon",
+            "add constraint"
+        ],
+        "body": [
+            "ALTER TABLE ${1:table_name}",
+            "ADD CONSTRAINT ${2:constraint_name}",
+            "${3|PRIMARY KEY,UNIQUE,FOREIGN KEY,CHECK|} (${4:column});",
+            "${0}"
+        ],
+        "description": "Add a constraint to a table"
+    },
+    "Foreign Key Constraint": {
+        "prefix": [
+            "fk",
+            "foreign key"
+        ],
+        "body": [
+            "ALTER TABLE ${1:child_table}",
+            "ADD CONSTRAINT ${2:fk_name}",
+            "FOREIGN KEY (${3:column})",
+            "REFERENCES ${4:parent_table} (${5:pk_column});",
+            "${0}"
+        ],
+        "description": "Add a foreign key constraint"
+    },
+    "Ref Cursor": {
+        "prefix": [
+            "refcur",
+            "ref cursor"
+        ],
+        "body": [
+            "TYPE ${1:cursor_type} IS REF CURSOR;",
+            "${2:cursor_var} ${1:cursor_type};",
+            "${0}"
+        ],
+        "description": "Declare a REF CURSOR type"
+    },
+    "Open Ref Cursor": {
+        "prefix": [
+            "openref",
+            "open ref cursor"
+        ],
+        "body": [
+            "OPEN ${1:cursor_var} FOR",
+            "  SELECT ${2:columns}",
+            "  FROM ${3:table_name}",
+            "  WHERE ${4:condition};",
+            "${0}"
+        ],
+        "description": "Open a REF CURSOR for a query"
+    },
+    "Pipelined Function": {
+        "prefix": [
+            "pipefunc",
+            "pipelined function"
+        ],
+        "body": [
+            "CREATE OR REPLACE FUNCTION ${1:function_name}",
+            "RETURN ${2:return_type} PIPELINED",
+            "IS",
+            "BEGIN",
+            "  FOR rec IN (SELECT ${3:columns} FROM ${4:table_name})",
+            "  LOOP",
+            "    PIPE ROW(rec);",
+            "  END LOOP;",
+            "  RETURN;",
+            "END ${1:function_name};",
+            "/"
+        ],
+        "description": "Create a pipelined table function"
+    },
+    "Autonomous Transaction": {
+        "prefix": [
+            "autotr",
+            "autonomous transaction"
+        ],
+        "body": [
+            "PRAGMA AUTONOMOUS_TRANSACTION;",
+            "${0}"
+        ],
+        "description": "Declare autonomous transaction pragma"
+    },
+    "NVL Expression": {
+        "prefix": [
+            "nvl"
+        ],
+        "body": [
+            "NVL(${1:expression}, ${2:default_value})"
+        ],
+        "description": "NVL function - return default if null"
+    },
+    "COALESCE Expression": {
+        "prefix": [
+            "coal",
+            "coalesce"
+        ],
+        "body": [
+            "COALESCE(${1:expr1}, ${2:expr2}, ${3:default})"
+        ],
+        "description": "COALESCE function - first non-null value"
+    },
+    "DECODE Expression": {
+        "prefix": [
+            "decode"
+        ],
+        "body": [
+            "DECODE(${1:expression},",
+            "       ${2:search1}, ${3:result1},",
+            "       ${4:search2}, ${5:result2},",
+            "       ${6:default})"
+        ],
+        "description": "DECODE function"
+    },
+    "LISTAGG": {
+        "prefix": [
+            "listagg"
+        ],
+        "body": [
+            "LISTAGG(${1:column}, '${2:,}') WITHIN GROUP (ORDER BY ${3:column})"
+        ],
+        "description": "LISTAGG aggregate function"
+    },
+    "ROW_NUMBER Analytic": {
+        "prefix": [
+            "rownum",
+            "row_number"
+        ],
+        "body": [
+            "ROW_NUMBER() OVER (${1|PARTITION BY column|} ORDER BY ${2:column}) AS rn"
+        ],
+        "description": "ROW_NUMBER analytic function"
+    },
+    "RANK Analytic": {
+        "prefix": [
+            "rankover",
+            "rank over"
+        ],
+        "body": [
+            "RANK() OVER (${1|PARTITION BY column|} ORDER BY ${2:column} ${3|ASC,DESC|}) AS rnk"
+        ],
+        "description": "RANK analytic function"
+    },
+    "LAG/LEAD Analytic": {
+        "prefix": [
+            "lag",
+            "lead"
+        ],
+        "body": [
+            "${1|LAG,LEAD|}(${2:column}, ${3:1}, ${4:0}) OVER (ORDER BY ${5:column})"
+        ],
+        "description": "LAG or LEAD analytic function"
+    },
+    "Merge Statement": {
+        "prefix": [
+            "merge"
+        ],
+        "body": [
+            "MERGE INTO ${1:target_table} t",
+            "USING ${2:source_table} s",
+            "ON (t.${3:id} = s.${3:id})",
+            "WHEN MATCHED THEN",
+            "  UPDATE SET t.${4:column} = s.${4:column}",
+            "WHEN NOT MATCHED THEN",
+            "  INSERT (${5:columns})",
+            "  VALUES (${6:values});",
+            "${0}"
+        ],
+        "description": "MERGE statement (upsert)"
+    },
+    "Insert All": {
+        "prefix": [
+            "insall",
+            "insert all"
+        ],
+        "body": [
+            "INSERT ALL",
+            "  INTO ${1:table1} (${2:columns}) VALUES (${3:values})",
+            "  INTO ${4:table2} (${5:columns}) VALUES (${6:values})",
+            "SELECT * FROM DUAL;",
+            "${0}"
+        ],
+        "description": "INSERT ALL - multiple inserts"
+    },
+    "WITH Clause (CTE)": {
+        "prefix": [
+            "with",
+            "cte"
+        ],
+        "body": [
+            "WITH ${1:cte_name} AS (",
+            "  SELECT ${2:columns}",
+            "  FROM ${3:table_name}",
+            "  WHERE ${4:condition}",
+            ")",
+            "SELECT *",
+            "FROM ${1:cte_name};",
+            "${0}"
+        ],
+        "description": "WITH clause (Common Table Expression)"
+    },
+    "Recursive CTE": {
+        "prefix": [
+            "rcte",
+            "recursive cte"
+        ],
+        "body": [
+            "WITH ${1:cte_name} (${2:columns}) AS (",
+            "  -- Anchor member",
+            "  SELECT ${3:columns}",
+            "  FROM ${4:table_name}",
+            "  WHERE ${5:parent_id} IS NULL",
+            "  UNION ALL",
+            "  -- Recursive member",
+            "  SELECT ${6:columns}",
+            "  FROM ${4:table_name} t",
+            "  JOIN ${1:cte_name} c ON t.${5:parent_id} = c.${7:id}",
+            ")",
+            "SELECT * FROM ${1:cte_name};",
+            "${0}"
+        ],
+        "description": "Recursive WITH clause (hierarchical query)"
+    },
+    "DBMS_APPLICATION_INFO": {
+        "prefix": [
+            "appinfo",
+            "set module"
+        ],
+        "body": [
+            "DBMS_APPLICATION_INFO.SET_MODULE(",
+            "  module_name => '${1:module_name}',",
+            "  action_name => '${2:action_name}'",
+            ");",
+            "${0}"
+        ],
+        "description": "Set module info visible in V$SESSION"
+    },
+    "Log Error Table": {
+        "prefix": [
+            "errlog",
+            "log errors"
+        ],
+        "body": [
+            "LOG ERRORS INTO ${1:error_table} ('${2:tag}')",
+            "REJECT LIMIT ${3|UNLIMITED,100,1000|}"
+        ],
+        "description": "LOG ERRORS clause for DML"
+    },
+    "RETURNING Clause": {
+        "prefix": [
+            "returning"
+        ],
+        "body": [
+            "RETURNING ${1:column} INTO ${2:variable}"
+        ],
+        "description": "RETURNING clause for INSERT/UPDATE"
+    },
+    "Flashback Query": {
+        "prefix": [
+            "fbquery",
+            "flashback query"
+        ],
+        "body": [
+            "SELECT ${1:columns}",
+            "FROM ${2:table_name} AS OF TIMESTAMP (SYSTIMESTAMP - INTERVAL '${3:1}' ${4|HOUR,MINUTE,DAY|})",
+            "WHERE ${5:condition};",
+            "${0}"
+        ],
+        "description": "Flashback query - view past data"
+    },
+    "Create Type Object": {
+        "prefix": [
+            "ctype",
+            "create type"
+        ],
+        "body": [
+            "CREATE OR REPLACE TYPE ${1:type_name} AS OBJECT (",
+            "  ${2:attribute1} ${3:VARCHAR2(100)},",
+            "  ${4:attribute2} ${5:NUMBER},",
+            "  ",
+            "  MEMBER FUNCTION ${6:method_name} RETURN ${7:VARCHAR2}",
+            ");",
+            "/",
+            "",
+            "CREATE OR REPLACE TYPE BODY ${1:type_name} AS",
+            "  MEMBER FUNCTION ${6:method_name} RETURN ${7:VARCHAR2} IS",
+            "  BEGIN",
+            "    ${0}",
+            "    RETURN NULL;",
+            "  END;",
+            "END;",
+            "/"
+        ],
+        "description": "Create an object type with body"
+    },
+    "Create Collection Type": {
+        "prefix": [
+            "coll",
+            "collection type"
+        ],
+        "body": [
+            "CREATE OR REPLACE TYPE ${1:type_name} AS TABLE OF ${2:element_type};",
+            "/"
+        ],
+        "description": "Create a collection type (nested table)"
+    },
+    "Grant Privileges": {
+        "prefix": [
+            "grant"
+        ],
+        "body": [
+            "GRANT ${1|SELECT,INSERT,UPDATE,DELETE,EXECUTE,ALL|} ON ${2:object_name} TO ${3:user_or_role};",
+            "${0}"
+        ],
+        "description": "Grant privileges on an object"
+    },
+    "Create Synonym": {
+        "prefix": [
+            "syn",
+            "synonym"
+        ],
+        "body": [
+            "CREATE ${1|OR REPLACE |} ${2|SYNONYM,PUBLIC SYNONYM|} ${3:synonym_name}",
+            "FOR ${4:schema}.${5:object_name};",
+            "${0}"
+        ],
+        "description": "Create a synonym"
+    },
+    "DBMS_SCHEDULER Job": {
+        "prefix": [
+            "schjob",
+            "scheduler job"
+        ],
+        "body": [
+            "BEGIN",
+            "  DBMS_SCHEDULER.CREATE_JOB (",
+            "    job_name        => '${1:JOB_NAME}',",
+            "    job_type        => 'STORED_PROCEDURE',",
+            "    job_action      => '${2:procedure_name}',",
+            "    start_date      => SYSTIMESTAMP,",
+            "    repeat_interval => 'FREQ=${3|DAILY,HOURLY,MINUTELY|}; INTERVAL=${4:1}',",
+            "    enabled         => TRUE,",
+            "    comments        => '${5:Job description}'",
+            "  );",
+            "END;",
+            "/",
+            "${0}"
+        ],
+        "description": "Create a DBMS_SCHEDULER job"
+    },
+    "Exception NO_DATA_FOUND Handler": {
+        "prefix": [
+            "whennodata",
+            "no_data_found"
+        ],
+        "body": [
+            "WHEN NO_DATA_FOUND THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('No data found');}",
+            "${0}"
+        ],
+        "description": "Handle NO_DATA_FOUND exception (ORA-01403)"
+    },
+    "Exception TOO_MANY_ROWS Handler": {
+        "prefix": [
+            "whentoomany",
+            "too_many_rows"
+        ],
+        "body": [
+            "WHEN TOO_MANY_ROWS THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('Too many rows returned');}",
+            "${0}"
+        ],
+        "description": "Handle TOO_MANY_ROWS exception (ORA-01422)"
+    },
+    "Exception ZERO_DIVIDE Handler": {
+        "prefix": [
+            "whenzerodiv",
+            "zero_divide"
+        ],
+        "body": [
+            "WHEN ZERO_DIVIDE THEN",
+            "  ${1:l_result := NULL;}",
+            "  ${2:DBMS_OUTPUT.PUT_LINE('Division by zero');}",
+            "${0}"
+        ],
+        "description": "Handle ZERO_DIVIDE exception (ORA-01476)"
+    },
+    "Exception DUP_VAL_ON_INDEX Handler": {
+        "prefix": [
+            "whendupval",
+            "dup_val_on_index"
+        ],
+        "body": [
+            "WHEN DUP_VAL_ON_INDEX THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('Duplicate value on unique constraint');}",
+            "${0}"
+        ],
+        "description": "Handle DUP_VAL_ON_INDEX exception (ORA-00001)"
+    },
+    "Exception VALUE_ERROR Handler": {
+        "prefix": [
+            "whenvalerr",
+            "value_error"
+        ],
+        "body": [
+            "WHEN VALUE_ERROR THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('Value error - check data types and sizes');}",
+            "${0}"
+        ],
+        "description": "Handle VALUE_ERROR exception (ORA-06502)"
+    },
+    "Exception INVALID_CURSOR Handler": {
+        "prefix": [
+            "wheninvcur",
+            "invalid_cursor"
+        ],
+        "body": [
+            "WHEN INVALID_CURSOR THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('Invalid cursor operation');}",
+            "${0}"
+        ],
+        "description": "Handle INVALID_CURSOR exception (ORA-01001)"
+    },
+    "Exception OTHERS Handler": {
+        "prefix": [
+            "whenothers",
+            "others"
+        ],
+        "body": [
+            "WHEN OTHERS THEN",
+            "  ${1:DBMS_OUTPUT.PUT_LINE('Error: ' || SQLERRM);}",
+            "  ${2:RAISE;}",
+            "${0}"
+        ],
+        "description": "Handle all other exceptions"
+    },
+    "User-Defined Exception": {
+        "prefix": [
+            "userexc",
+            "define exception"
+        ],
+        "body": [
+            "${1:e_custom_error} EXCEPTION;",
+            "PRAGMA EXCEPTION_INIT(${1:e_custom_error}, ${2:-20001});",
+            "${0}"
+        ],
+        "description": "Declare a user-defined exception with EXCEPTION_INIT"
+    },
+    "RAISE_APPLICATION_ERROR": {
+        "prefix": [
+            "raiseerr",
+            "raiseapp"
+        ],
+        "body": [
+            "RAISE_APPLICATION_ERROR(${1:-20001}, '${2:Error message}');",
+            "${0}"
+        ],
+        "description": "Raise a user-defined error (-20000 to -20999)"
+    },
+    "Complete Exception Block": {
+        "prefix": [
+            "excblock",
+            "exception block"
+        ],
+        "body": [
+            "EXCEPTION",
+            "  WHEN NO_DATA_FOUND THEN",
+            "    ${1:NULL;}",
+            "  WHEN TOO_MANY_ROWS THEN",
+            "    ${2:NULL;}",
+            "  WHEN OTHERS THEN",
+            "    DBMS_OUTPUT.PUT_LINE('Error: ' || SQLCODE || ' - ' || SQLERRM);",
+            "    ${3:RAISE;}",
+            "${0}"
+        ],
+        "description": "Complete exception handling block with common handlers"
+    },
+    "Exception with Logging": {
+        "prefix": [
+            "exclog",
+            "exception log"
+        ],
+        "body": [
+            "EXCEPTION",
+            "  WHEN OTHERS THEN",
+            "    INSERT INTO ${1:error_log} (error_date, error_code, error_message, procedure_name)",
+            "    VALUES (SYSDATE, SQLCODE, SQLERRM, '${2:procedure_name}');",
+            "    COMMIT;",
+            "    RAISE;",
+            "${0}"
+        ],
+        "description": "Exception handler that logs errors to a table"
+    },
+    "Safe Division": {
+        "prefix": [
+            "safediv",
+            "safe divide"
+        ],
+        "body": [
+            "${1:result} := CASE WHEN ${2:divisor} = 0 THEN NULL ELSE ${3:dividend} / ${2:divisor} END;",
+            "${0}"
+        ],
+        "description": "Safe division avoiding ZERO_DIVIDE"
+    },
+    "Safe SELECT INTO": {
+        "prefix": [
+            "safesel",
+            "safe select"
+        ],
+        "body": [
+            "BEGIN",
+            "  SELECT ${1:column}",
+            "  INTO ${2:l_variable}",
+            "  FROM ${3:table_name}",
+            "  WHERE ${4:condition};",
+            "EXCEPTION",
+            "  WHEN NO_DATA_FOUND THEN",
+            "    ${2:l_variable} := ${5:default_value};",
+            "END;",
+            "${0}"
+        ],
+        "description": "SELECT INTO with NO_DATA_FOUND handling"
+    }
+}

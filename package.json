@@ -1,0 +1,78 @@
+{
+  "name": "oraclecraft",
+  "displayName": "OracleCraft",
+  "description": "A modern, lightweight PL/SQL language extension for VS Code - syntax highlighting, autocomplete, snippets, and documentation",
+  "version": "1.0.0",
+  "publisher": "2cpe",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets"
+  ],
+  "keywords": [
+    "plsql",
+    "oracle",
+    "sql",
+    "database",
+    "pl/sql"
+  ],
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2cpe/OracleCraft"
+  },
+  "homepage": "https://github.com/2cpe/OracleCraft",
+  "bugs": {
+    "url": "https://github.com/2cpe/OracleCraft/issues"
+  },
+  "activationEvents": [
+    "onLanguage:plsql"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "plsql",
+        "aliases": [
+          "PL/SQL",
+          "Oracle PL/SQL",
+          "plsql"
+        ],
+        "extensions": [
+          ".sql",
+          ".pls",
+          ".pks",
+          ".pkb"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "plsql",
+        "scopeName": "source.plsql",
+        "path": "./syntaxes/plsql.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "plsql",
+        "path": "./snippets/plsql.snippets.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.0.0",
+    "@types/vscode": "^1.74.0",
+    "typescript": "^5.0.0"
+  }
+}
