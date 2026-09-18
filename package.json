@@ -2,7 +2,7 @@
   "name": "oraclecraft",
   "displayName": "OracleCraft",
   "description": "A modern, lightweight PL/SQL language extension for VS Code - syntax highlighting, autocomplete, snippets, and documentation",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "publisher": "2cpe",
   "license": "MIT",
   "engines": {
@@ -17,8 +17,7 @@
     "oracle",
     "sql",
     "database",
-    "pl/sql",
-    "oracle-sql"
+    "pl/sql"
   ],
   "icon": "images/icon.png",
   "repository": {
