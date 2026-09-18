@@ -2,7 +2,7 @@
   "name": "oraclecraft",
   "displayName": "OracleCraft",
   "description": "A modern, lightweight PL/SQL language extension for VS Code - syntax highlighting, autocomplete, snippets, and documentation",
-  "version": "1.0.0",
+  "version": "1.0.4",
   "publisher": "2cpe",
   "license": "MIT",
   "engines": {
@@ -17,7 +17,8 @@
     "oracle",
     "sql",
     "database",
-    "pl/sql"
+    "pl/sql",
+    "oracle-sql"
   ],
   "icon": "images/icon.png",
   "repository": {
@@ -29,7 +30,8 @@
     "url": "https://github.com/2cpe/OracleCraft/issues"
   },
   "activationEvents": [
-    "onLanguage:plsql"
+    "onLanguage:plsql",
+    "onLanguage:plaintext"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -47,7 +49,11 @@
           ".pks",
           ".pkb"
         ],
-        "configuration": "./language-configuration.json"
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./images/plsql-icon.svg",
+          "dark": "./images/plsql-icon.svg"
+        }
       }
     ],
     "grammars": [
